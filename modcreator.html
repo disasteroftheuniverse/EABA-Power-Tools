@@ -55,9 +55,11 @@ function grab(){
         var mod = {
                 "name" : String($("input#mod_name").val()),
                 "cost" : String($("input#mod_cost").val()),
+                "defaultcost" : String($("input#mod_cost").val()),
                 "tag" : String($("select#mod_tag").val()),
                 "color" : String($("select#mod_color").val()),
                 "icon" : "&#x"+($("select#mod_icon").val()).codePointAt(0).toString(16),
+                "notes" : "",
                 "tooltip" : String($("input#mod_tooltip").val())
         }
         var display = JSON.stringify(mod);

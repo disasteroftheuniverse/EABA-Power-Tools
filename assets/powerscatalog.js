@@ -99,7 +99,15 @@ var modifiers = [
 			"instant" : -3
 		},
 		"active":"0"
-    }
+    }, 
+    {"name":"acts as lethal dmg","cost":"0","defaultcost":"0","tag":"offense","color":"green","icon":"&#xe800","notes":"","tooltip":"acts as lethal damage"}, 
+    {"name":"acts as stunning dmg","cost":"2","defaultcost":"2","tag":"offense","color":"#4286f4","icon":"&#xe800","notes":"","tooltip":"acts as stunning damage"}, 
+    {"name":"acts as lethal melee","cost":"2","defaultcost":"2","tag":"offense","color":"green","icon":"&#xe800","notes":"","tooltip":"acts as lethal melee"}, 
+    {"name":"acts as stunning melee","cost":"4","defaultcost":"4","tag":"offense","color":"green","icon":"&#xe800","notes":"","tooltip":"acts as stunning melee damage"}, 
+    {"name":"affect very broad power","cost":"-10","defaultcost":"-10","tag":"offense","color":"red","icon":"&#xe800","notes":"","tooltip":""}, 
+    {"name":"affect broad power","cost":"-6","defaultcost":"-6","tag":"offense","color":"#4286f4","icon":"&#xe800","notes":"","tooltip":""}, 
+    {"name":"affect average power","cost":"-4","defaultcost":"-4","tag":"offense","color":"green","icon":"&#xe800","notes":"","tooltip":""}, 
+    {"name":"affect narrow power","cost":"-2","defaultcost":"-2","tag":"offense","color":"green","icon":"&#xe800","notes":"","tooltip":""}
 ]
 
 

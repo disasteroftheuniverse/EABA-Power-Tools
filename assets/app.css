@@ -12,6 +12,8 @@ table, th, td {
     body {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 12pt; 
+      color: white;
+      background-color: #3d3d3d;
     }
     tr{
 
@@ -34,11 +36,12 @@ table, th, td {
   .leftTable, .rightTable {
     position:relative;
     float:left;
-    background-color: lightgrey;
+    background-color: #5b5b5b;
     min-width:300px;
     margin: 8px;
     font-size: 10px;
-    
+    border-radius: 8px;
+    box-shadow: 4px 4px 2px 0px #000000;
   }
 
   td.powername {
@@ -99,6 +102,7 @@ table, th, td {
 }
 
 .myButton {
+  
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
 	box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -121,7 +125,8 @@ table, th, td {
 	font-size:13px;
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #154682;
+  text-shadow:0px 1px 0px #154682;
+  margin:8px;
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
@@ -137,5 +142,17 @@ table, th, td {
 	position:relative;
 	top:1px;
 }
+
+.toolbar{
+  background-color: #5b5b5b;
+  box-shadow: 4px 4px 2px 0px #000000;
+  margin: 8px 8px 8px;
+}
+
+.topmenu {
+  /*height: 60px;*/
+  vertical-align: middle;
+}
+
 
 

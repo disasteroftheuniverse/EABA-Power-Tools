@@ -13,19 +13,27 @@
   <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
   <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
   <script src="assets/powerscatalog.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js"></script> 
   <script>
 
   </script>
 </head>
 
 <body>
-  <a href="#" type='submit' onclick="saveToLocal()" class="myButton">Save Power</a>
-  <input type="file" id="uploader" value="Upload" onchange='uploader()' class="loadButton"/>
-  <a href="modcreator.html">Goto mod entry</a>
-  <hr>
+  
+  <div class='toolbar topmenu'>
+    <a href="#" type='submit' onclick="saveToLocal()" class="myButton"> <span class='icon-'>&#xe806;</span> Save Power</a>
+    <span class="myButton tooltip">
+        <span class='icon-'>&#xe807;</span> Load Power
+      <span class="tooltiptext" style="top: 30px; width:256">
+        <input type="file" id="uploader" value="Upload" onchange='uploader()'></input>
+      </span>
+    </span >
+    <a href="modcreator.html" class="myButton">Goto mod entry</a>
+  </div>
+  
   <div>
-    <div>
+    <div class='toolbar'>
       <table class="modlist">
         <tr>
           <td>
@@ -66,9 +74,9 @@
     </div>
 
     <!-- <button onclick="listModifiers()">List Powers</button> -->
-   <button onclick="buildRow ()">Filter</button>
+    <!-- <button onclick="buildRow ()">Filter</button> -->
   </div>
-  <hr/>
+  
   <div class="leftTable">
     <table class="modlist">
       <tr class="availablemods">
@@ -101,7 +109,7 @@
     </table>
   </div>
   <br>
-  <hr>
+
 
 </body>
 
