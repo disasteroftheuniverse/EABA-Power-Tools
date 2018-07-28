@@ -1,0 +1,70 @@
+<html><head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+        <link rel="stylesheet" type="text/css" href="fonts/css/animation.css">
+        <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-codes.css">
+        <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-embedded.css">
+        <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7-codes.css">
+        <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
+        <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
+
+</head><body>
+        <a href="index.html">Goto Index</a>
+        <hr>
+        Name: <input type="text" id="mod_name"> <br>
+        Cost: <input type="number" id="mod_cost"> <br>
+        Tag: <select id="mod_tag">
+                <option value="offense">offense</option>
+                <option value="defense">defense</option>
+                <option value="control">control</option>
+                <option value="alter">alter</option>
+                <option value="suite">suite</option>
+                <option value="range">range</option>
+                <option value="duration">power duration</option>
+                <option value="defense_against">defense against</option>
+                <option value="visibility">visibility</option>
+                <option value="ceiling">ceiling</option>
+                <option value="circumstance">circumstance</option>
+                <option value="coverage">coverage</option>
+                <option value="base_difficulty">difficulty</option>
+        </select> <br>
+        color: <select id="mod_color">
+                <option value="red">red</option>
+                <option value="green">green</option>
+                <option value="#4286f4">blue</option>
+        </select>
+        icon: <select id="mod_icon" class="icon-main">
+                <option value="&#xe800;">&#xe800;</option>
+                <option value="&#xe801;">&#xe801;</option>
+                <option value="&#xe802;">&#xe802;</option>
+                <option value="&#xe803;">&#xe803;</option>
+                <option value="&#xe804;">&#xe804;</option>
+                <option value="&#xe805;">&#xe805;</option>
+                <option value="&#xe808;">&#xe808;</option>
+                <option value="&#xe819;">&#xe819;</option>
+                <option value="&#xf252;">&#xf252;</option>
+                <option value="&#xB1;">&#xB1;</option>
+        </select> <br>
+        Tooltip: <input type="text" id="mod_tooltip"> <br>
+        <button onclick="grab()">Generate</button>
+        <hr>
+        JSON: <textarea id="output" style="width:500px;height:500px;"></textarea>
+<script>
+function grab(){
+
+        var mod = {
+                "name" : String($("input#mod_name").val()),
+                "cost" : String($("input#mod_cost").val()),
+                "tag" : String($("select#mod_tag").val()),
+                "color" : String($("select#mod_color").val()),
+                "icon" : "&#x"+($("select#mod_icon").val()).codePointAt(0).toString(16),
+                "tooltip" : String($("input#mod_tooltip").val())
+        }
+        var display = JSON.stringify(mod);
+        var old = String($("textarea#output").val());
+        old = old + ", \n" + display; 
+        $("textarea#output").text(old);
+}
+
+</script>
+</body></html>

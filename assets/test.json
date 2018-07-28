@@ -1,0 +1,42 @@
+﻿[
+	{
+		"name": "information: store",
+		"cost": "-1",
+		"tag": "information",
+		"color": "green",
+		"icon": "",
+		"tooltip": "The effect of the power is to hold And retreive information.",
+		"defaultcost": "-1",
+		"notes": "test"
+	},
+	{
+		"name": "information: receive",
+		"cost": "-2",
+		"tag": "information",
+		"color": "#4286f4",
+		"icon": "",
+		"tooltip": "",
+		"defaultcost": "-2",
+		"notes": "test"
+	},
+	{
+		"name": "information: receive",
+		"cost": "-2",
+		"tag": "information",
+		"color": "#4286f4",
+		"icon": "",
+		"tooltip": "",
+		"defaultcost": "-2",
+		"notes": "test"
+	},
+	{
+		"name": "information: jam",
+		"cost": "-3",
+		"tag": "information",
+		"color": "#4286f4",
+		"icon": "",
+		"tooltip": "",
+		"defaultcost": "-3",
+		"notes": "asdaed"
+	}
+]

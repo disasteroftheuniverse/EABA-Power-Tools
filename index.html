@@ -1,0 +1,108 @@
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script type="text/javascript" src="assets/upclick-min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/app.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/animation.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-codes.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-embedded.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7-codes.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
+  <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
+  <script src="assets/powerscatalog.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+
+  </script>
+</head>
+
+<body>
+  <a href="#" type='submit' onclick="saveToLocal()" class="myButton">Save Power</a>
+  <input type="file" id="uploader" value="Upload" onchange='uploader()' class="loadButton"/>
+  <a href="modcreator.html">Goto mod entry</a>
+  <hr>
+  <div>
+    <div>
+      <table class="modlist">
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_mobility" name="mobility" value="1" class="myFilter" onclick="sortModifiers()">mobility
+          </td>
+          <td>
+            <input type="checkbox" id="filter_control" name="control" value="1" class="myFilter" onclick="sortModifiers()">control
+          </td>
+          <td>
+            <input type="checkbox" id="filter_duration" name="duration" value="1" class="myFilter" onclick="sortModifiers()">duration
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_information" name="information" value="1" class="myFilter" onclick="sortModifiers()">information
+          </td>
+          <td>
+              <input type="checkbox" id="filter_alter" name="alter" value="1" class="myFilter" onclick="sortModifiers()">alter
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_offense" name="offense" value="1" class="myFilter" onclick="sortModifiers()">offense
+          </td>
+          <td>
+              <input type="checkbox" id="filter_suite" name="suite" value="1" class="myFilter" onclick="sortModifiers()">suite
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_defense" name="defense" value="1" class="myFilter" onclick="sortModifiers()">defense
+          </td>
+          <td>
+              <input type="checkbox" id="filter_range" name="range" value="1" class="myFilter" onclick="sortModifiers()">range
+            </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <button onclick="listModifiers()">List Powers</button> -->
+   <button onclick="buildRow ()">Filter</button>
+  </div>
+  <hr/>
+  <div class="leftTable">
+    <table class="modlist">
+      <tr class="availablemods">
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Use</th>
+      </tr>
+    </table>
+  </div>
+
+  <div class="rightTable">
+    <table class="powerlist">
+      <tr class="availablepower">
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Notes</th>
+        <th>Select</th>
+        <th>Cost</th>
+        <th>Use</th>
+      </tr>
+      <tr class="powertotals">
+        <td>Icon</td>
+        <td></td>
+        <td>Base Power:</td>
+        <td></td>
+        <td class='powercost' id="powertotal">10</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <hr>
+
+</body>
+
+</html>
