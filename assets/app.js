@@ -147,7 +147,8 @@ function updatePower() { //updates user interface
 	$(document).ready(function () { //warning, async
 		$("tr").remove(".powerrow"); //clear old table
 		$(".powertotals").before(output);
-		$("td#powertotal").text(power.total()); //display current power total
+		$("SPAN#powertotal").text(power.total()); //display current power total
+
 	});
 
 };
@@ -168,10 +169,10 @@ function createSelect(obj, id, selected) {
 //-------------------------------Read/Write---------------------------------
 function saveToLocal() {
 	updatePower();
-	var data = JSON.stringify(power.mods, null, "\t");
+	var data = LZString.compressToEncodedURIComponent(JSON.stringify(power.mods));
 	logMe(data);
 	var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-	saveAs(blob, "mypower.json");
+	saveAs(blob, "mypower.txt");
 
 }
 
@@ -184,17 +185,20 @@ function openLocal() {
 }
 
 var readTextFile = function() {
-	var file    = document.querySelector('input[type=file]').files[0];
+	var file = document.querySelector('input[type=file]').files[0];
 	var reader = new FileReader();
 	//var blob = new Blob();
 	var out;
 	var importedPowers;
 	reader.addEventListener("load", function () {
-		out=(reader.result);
-		importedPowers = JSON.parse(out);
-		logDir(importedPowers);
-		power.mods=[];
-		power.mods=importedPowers;
+		out=reader.result;
+		var deflated = new String;
+		deflated = LZString.decompressFromEncodedURIComponent(out);
+		importedPowers = JSON.parse(deflated);
+		logMe(out);
+		logMe(deflated);
+		//power.mods=[];
+		//power.mods=importedPowers;
 		updatePower();
 	}, false);
 	if (file) {

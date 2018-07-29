@@ -42,6 +42,7 @@ table, th, td {
     font-size: 10px;
     border-radius: 8px;
     box-shadow: 4px 4px 2px 0px #000000;
+    padding: 8px;
   }
 
   td.powername {
@@ -155,4 +156,14 @@ table, th, td {
 }
 
 
+.highlights {
 
+  margin: 12px;
+  padding: 4px;
+  background-color: yellow;
+  border: 1px solid black;
+  border-radius: 9px;
+  color: black;
+  font-weight: bolder;
+
+}
