@@ -107,6 +107,30 @@ function removePower(index) { //pulls  mod entries from power.mod array
 	updatePower();
 };
 
+function movePowerUp(index) { //moves selected mod up in list
+	if (index != 0) {
+		var oldMod = power.mods[index];
+		var newMod = power.mods[index - 1];
+		power.mods[index] = newMod;
+		power.mods[index - 1] = oldMod;
+		updatePower();
+	}
+};
+
+function movePowerDn(index) { //pulls  mod entries from power.mod array
+	var n = 0;
+	
+	n = Number(power.mods.length) - 1;
+	console.log(n);
+	if (index != n) {
+		var oldMod = power.mods[index];
+		var newMod = power.mods[index + 1];
+		power.mods[index] = newMod;
+		power.mods[index + 1] = oldMod;
+		updatePower();
+	}
+};
+
 function updatePower() { //updates user interface
 	var i = 0; //bean counter
 
@@ -114,7 +138,7 @@ function updatePower() { //updates user interface
 	var output = "";
 	output = String(_.reduce(power.mods, function (modTable, newRow, key) {
 		//logDir(newRow);
-		var cell = ["", "", "", "", ""];
+		var cell = ["", "", "", "", "", ""];
 		cell[0] = String("<td class='icon-main powercolor' style='color:" + newRow.color + ";'>" + newRow.icon + "</td>");
 		cell[1] = "<td class='powername'>" + newRow.name + "</td>";
 		var noteInput = "<input type='text' class='notearea' id='note_" + key + "' onchange='changeNote(" + key + ")' value='" + newRow.notes + "'></input>";
@@ -138,16 +162,20 @@ function updatePower() { //updates user interface
 		cell[3] = "<td class='' >" + man + "</td>";
 		cell[4] = "<td class='powercost' >" + newRow.cost + "</td>";
 		cell[5] = "<td><button onclick='removePower(" + key + ")'>-</button></td>";
-		var row = String("<tr class='powerrow'>" + cell[0] + cell[1] + cell[2] + cell[3] + cell[4] + cell[5] + "</tr>" + "\n");
+		cell[6] = "<td><button onclick='movePowerUp("+key+")'>▲</button><button onclick='movePowerDn("+key+")'>▼</button></td>";
+		var row = String("<tr class='powerrow'>" + cell[0] + cell[1] + cell[2] + cell[3] + cell[4] + cell[5] + cell[6] + "</tr>" + "\n");
 		//logMe(row);
 		return modTable + row;
 	}, ""));
 
 
 	$(document).ready(function () { //warning, async
+		power.name = $("#power_name").val();
 		$("tr").remove(".powerrow"); //clear old table
 		$(".powertotals").before(output);
 		$("SPAN#powertotal").text(power.total()); //display current power total
+		$("#power_name").val(power.name);
+		logMe(power.name);
 
 	});
 
@@ -169,15 +197,17 @@ function createSelect(obj, id, selected) {
 //-------------------------------Read/Write---------------------------------
 function saveToLocal() {
 	updatePower();
-	var data = LZString.compressToEncodedURIComponent(JSON.stringify(power.mods));
-	logMe(data);
+	var temp = power.mods.slice(0); 
+	temp.push({"name" : power.name});
+	//logDir(temp);
+	var data = LZString.compressToEncodedURIComponent(JSON.stringify(temp));
+	//logMe(data);
 	var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
 	saveAs(blob, "mypower.txt");
 
 }
 
 function openLocal() {
-
 	$(function () {
 		var file = new FileReader;
 		logDir($("#openlocal").files);
@@ -186,8 +216,9 @@ function openLocal() {
 
 var readTextFile = function() {
 	var file = document.querySelector('input[type=file]').files[0];
+
 	var reader = new FileReader();
-	//var blob = new Blob();
+
 	var out;
 	var importedPowers;
 	reader.addEventListener("load", function () {
@@ -195,10 +226,12 @@ var readTextFile = function() {
 		var deflated = new String;
 		deflated = LZString.decompressFromEncodedURIComponent(out);
 		importedPowers = JSON.parse(deflated);
+		logMe(importedPowers[importedPowers.length-1].name);
+		importedPowers.pop();
 		logMe(out);
 		logMe(deflated);
-		//power.mods=[];
-		//power.mods=importedPowers;
+		power.mods=[];
+		power.mods=importedPowers;
 		updatePower();
 	}, false);
 	if (file) {
@@ -207,6 +240,8 @@ var readTextFile = function() {
 }
 
 function uploader() {
+	power.mods=[];
+	updatePower();
 	var openme = document.getElementById("uploader").value;
 	var showme = readTextFile();//openme);
 	//logDir(showme);
