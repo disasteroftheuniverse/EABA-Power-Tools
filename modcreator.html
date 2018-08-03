@@ -7,58 +7,93 @@
         <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7-codes.css">
         <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
         <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
+<style>
+        body{
+                font-family: Arial, Helvetica, sans-serif;
 
+        }
+        select{
+                text-align: center;
+        }
+span {
+        line-height: 26px;
+        padding:2px;
+        margin:2px;
+}
+.cost{
+        line-height: 20px;
+        width: 40px;
+        text-align: center;
+}
+</style>
 </head><body>
         <a href="index.html">Goto Index</a>
         <hr>
-        Name: <input type="text" id="mod_name"> <br>
-        Cost: <input type="number" id="mod_cost"> <br>
-        Tag: <select id="mod_tag">
-                <option value="offense">offense</option>
-                <option value="defense">defense</option>
-                <option value="control">control</option>
-                <option value="alter">alter</option>
-                <option value="suite">suite</option>
-                <option value="range">range</option>
-                <option value="duration">power duration</option>
-                <option value="defense_against">defense against</option>
-                <option value="visibility">visibility</option>
-                <option value="ceiling">ceiling</option>
-                <option value="circumstance">circumstance</option>
-                <option value="coverage">coverage</option>
-                <option value="base_difficulty">difficulty</option>
-        </select> <br>
-        color: <select id="mod_color">
-                <option value="red">red</option>
-                <option value="GreenYellow">green</option>
-                <option value="LightSkyBlue">blue</option>
-        </select>
-        icon: <select id="mod_icon" class="icon-main">
-                <option value="&#xe800;">&#xe800;</option>
-                <option value="&#xe801;">&#xe801;</option>
-                <option value="&#xe802;">&#xe802;</option>
-                <option value="&#xe803;">&#xe803;</option>
-                <option value="&#xe804;">&#xe804;</option>
-                <option value="&#xe805;">&#xe805;</option>
-                <option value="&#xe808;">&#xe808;</option>
-                <option value="&#xe819;">&#xe819;</option>
-                <option value="&#xf252;">&#xf252;</option>
-                <option value="&#xB1;">&#xB1;</option>
-        </select> <br>
-        Tooltip: <input type="text" id="mod_tooltip"> <br>
-        priority: <select id="mod_priority">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-        </select> <br>
-        <button onclick="grab()">Generate</button>
+        <div>
+                <span>
+                        Name: <input type="text" id="mod_name">
+                </span> <br>
+                <span>
+                        Cost: <input type="number" id="mod_cost" value='0' class='cost' >
+                </span> <br>
+                <span>
+                        Tag: <select id="mod_tag">
+                                <option value="offense">offense</option>
+                                <option value="defense">defense</option>
+                                <option value="control">control</option>
+                                <option value="alter">alter</option>
+                                <option value="suite">suite</option>
+                                <option value="range">range</option>
+                                <option value="duration">power duration</option>
+                                <option value="defense_against">defense against</option>
+                                <option value="visibility">visibility</option>
+                                <option value="ceiling">ceiling</option>
+                                <option value="circumstance">circumstance</option>
+                                <option value="coverage">coverage</option>
+                                <option value="base_difficulty">difficulty</option>
+                        </select>
+                </span> <br>
+                <span>
+                        color: <select id="mod_color">
+                                <option value="red">red</option>
+                                <option value="GreenYellow">green</option>
+                                <option value="LightSkyBlue">blue</option>
+                        </select>
+                
+                icon: <select id="mod_icon" class="icon-main">
+                        <option value="&#xe800;">&#xe800;</option>
+                        <option value="&#xe801;">&#xe801;</option>
+                        <option value="&#xe802;">&#xe802;</option>
+                        <option value="&#xe803;">&#xe803;</option>
+                        <option value="&#xe804;">&#xe804;</option>
+                        <option value="&#xe805;">&#xe805;</option>
+                        <option value="&#xe808;">&#xe808;</option>
+                        <option value="&#xe819;">&#xe819;</option>
+                        <option value="&#xf252;">&#xf252;</option>
+                        <option value="&#xB1;">&#xB1;</option>
+                        <option value="&#x2295;">&#x2295;</option>
+                </select> </span> <br>
+                <span>
+                        Tooltip: <input type="text" id="mod_tooltip"> 
+                </span><br>
+                <span>
+                        priority: <select id="mod_priority">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                        </select>
+                </span> <br>
+        </div>
+        <span>
+                <button onclick="grab()">Generate</button>
+        </span>
         <hr>
         JSON: <textarea id="output" style="width:500px;height:500px;"></textarea>
 <script>
@@ -79,6 +114,8 @@ function grab(){
         var old = String($("textarea#output").val());
         old = old + ", \n" + display; 
         $("textarea#output").text(old);
+        $("input#mod_cost").val("0");
+
 }
 
 </script>

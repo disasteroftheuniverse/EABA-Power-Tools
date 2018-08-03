@@ -1,7 +1,8 @@
 <html>
 
 <head>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script language="javascript" src="assets/lz-string.min.js"></script>
@@ -14,27 +15,30 @@
   <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
   <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
   <script src="assets/powerscatalog.js"></script>
-  <script src="assets/app.js"></script> 
+  <script src="assets/app.js"></script>
   <script>
 
   </script>
 </head>
 
-<body  onload="listModifiers()">
-  
+<body>
+
   <div class='toolbar topmenu'>
-    <a href="#" type='submit' onclick="saveToLocal()" class="myButton"> <span class='icon-'>&#xe806;</span> Save Power</a>
+    <a href="#" type='submit' onclick="newPower()" class="myButton">New Power</a>
+    <a href="#" type='submit' onclick="fakeNews()" class="myButton">New Fake NEws</a>
+    <a href="#" type='submit' onclick="saveToLocal()" class="myButton">
+      <span class='icon-'>&#xe806;</span> Save Power</a>
     <span class="myButton tooltip">
-        <span class='icon-'>&#xe807;</span> Load Power
+      <span class='icon-'>&#xe807;</span> Load Power
       <span class="tooltiptext" style="width:256;">
-        <input type="file" id="uploader" value="Upload" onclick = 'clearPower()' onchange='uploader()'></input>
+        <input type="file" id="uploader" value="Upload" onclick='clearPower()' onchange='uploader()'></input>
       </span>
-    </span >
+    </span>
     <a href="modcreator.html" class="myButton">Goto mod entry</a>
   </div>
-  
+
   <div>
-    <div class='toolbar'>
+    <div class="filterTable">
       <table class="modlist">
         <tr>
           <td>
@@ -43,33 +47,30 @@
           <td>
             <input type="checkbox" id="filter_control" name="control" value="1" class="myFilter" onclick="sortModifiers()">control
           </td>
-          <td>
-            <input type="checkbox" id="filter_duration" name="duration" value="1" class="myFilter" onclick="sortModifiers()">duration
-          </td>
         </tr>
         <tr>
           <td>
             <input type="checkbox" id="filter_information" name="information" value="1" class="myFilter" onclick="sortModifiers()">information
           </td>
           <td>
-              <input type="checkbox" id="filter_alter" name="alter" value="1" class="myFilter" onclick="sortModifiers()">alter
-            </td>
+            <input type="checkbox" id="filter_alter" name="alter" value="1" class="myFilter" onclick="sortModifiers()">alter
+          </td>
         </tr>
         <tr>
           <td>
             <input type="checkbox" id="filter_offense" name="offense" value="1" class="myFilter" onclick="sortModifiers()">offense
           </td>
           <td>
-              <input type="checkbox" id="filter_suite" name="suite" value="1" class="myFilter" onclick="sortModifiers()">suite
-            </td>
+            <input type="checkbox" id="filter_suite" name="suite" value="1" class="myFilter" onclick="sortModifiers()">suite
+          </td>
         </tr>
         <tr>
           <td>
             <input type="checkbox" id="filter_defense" name="defense" value="1" class="myFilter" onclick="sortModifiers()">defense
           </td>
           <td>
-              <input type="checkbox" id="filter_range" name="range" value="1" class="myFilter" onclick="sortModifiers()">range
-            </td>
+            <input type="checkbox" id="filter_range" name="range" value="1" class="myFilter" onclick="sortModifiers()">range
+          </td>
         </tr>
       </table>
     </div>
@@ -77,7 +78,7 @@
     <!-- <button onclick="listModifiers()">List Powers</button> -->
     <!-- <button onclick="buildRow ()">Filter</button> -->
   </div>
-  
+
   <div class="leftTable">
     <table class="modlist">
       <tr class="availablemods">
@@ -100,19 +101,39 @@
         <th>Use</th>
       </tr> -->
       <tr class="availablepower">
-          <td></td>
-          <td><b>Power Name</b></td>
-          <td><input type='text' class='notearea' id='power_name' onchange='updatePower()'></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <td></td>
+        <td>
+          <b>Power Name</b>
+        </td>
+        <td>
+          <input type='text' class='notearea' id='power_name' onchange='updatePower()'>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr class="availablepower">
+        <td></td>
+        <td>Gameworld Base</td>
+        <td>
+          <input type='number' class='notearea-number' id='power_gameworldbase' onchange='updatePower()'>
+          <input type='number' class='notearea-number' id='power_gameworldeffic' onchange='updatePower()'>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
       <tr class="powertotals">
-        <td><button onclick='organizePower()'>Sort</button></td>
+        <td>
+          <button onclick='organizePower()'>Sort</button>
+        </td>
         <td></td>
         <td>Base Power:</td>
         <td></td>
-        <td><span class='powercost highlights' id="powertotal">0</span></td>
+        <td>
+          <span class='powercost highlights' id="powertotal">0</span>
+        </td>
         <td></td>
         <td></td>
       </tr>

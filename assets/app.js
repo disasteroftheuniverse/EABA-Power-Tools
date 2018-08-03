@@ -12,9 +12,13 @@ var power = { //object of the total power
 		var foo = _.sortBy(_.compact(_.map(this.mods, function (value, key) {
 			if (value.tag == "information") { return value };
 		})), "cost");
-
+		logDir(foo);
 	}
 };
+
+function fakeNews() {
+	power.checkInformation();
+}
 
 function listModifiers(list) { //this function pulls in a sorted list of available mods from JSON
 
@@ -130,6 +134,26 @@ function movePowerDn(index) { //pulls  mod entries from power.mod array
 		updatePower();
 	}
 };
+
+function newPower(){
+	$(document).ready(function () {
+
+		power.mods = [];
+		listModifiers();
+		updatePower();
+		var newName = prompt("Please enter new power name", "My Awesome Power");
+
+		if (_.isUndefined(newName)) {
+			newName = "New Power";
+		}
+
+		power.name = newName;
+		$("#power_name").val(power.name);
+		
+		updatePower();
+
+	});
+}
 
 function organizePower(){
 	power.mods = _.sortBy(power.mods,'priority');
