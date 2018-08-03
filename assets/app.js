@@ -3,7 +3,7 @@ var power = { //object of the total power
 	total: function () { //gets the sum of all mods, regardless of special rules
 		return Number(_.reduce(_.pluck(this.mods, "cost"), function (memo, num) { return Number(memo) + Number(num); }, 0));
 	},
-	name : "",
+	name : "my power",
 	setName : function (n) {
 		this.name = n;
 	},
@@ -131,6 +131,16 @@ function movePowerDn(index) { //pulls  mod entries from power.mod array
 	}
 };
 
+function organizePower(){
+	power.mods = _.sortBy(power.mods,'priority');
+	updatePower();
+}
+
+function clearPower () {
+	power.name = "";
+	power.mods =[];
+	updatePower();
+}
 function updatePower() { //updates user interface
 	var i = 0; //bean counter
 
@@ -203,7 +213,8 @@ function saveToLocal() {
 	var data = LZString.compressToEncodedURIComponent(JSON.stringify(temp));
 	//logMe(data);
 	var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-	saveAs(blob, "mypower.txt");
+	var filetitle=power.name;
+	saveAs(blob, filetitle+".eaba");
 
 }
 

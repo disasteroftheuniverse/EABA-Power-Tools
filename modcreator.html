@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols-ie7.css">
         <link rel="stylesheet" type="text/css" href="fonts/css/eaba_symbols.css">
 
-</head><body onload="listModifiers()">
+</head><body>
         <a href="index.html">Goto Index</a>
         <hr>
         Name: <input type="text" id="mod_name"> <br>
@@ -30,8 +30,8 @@
         </select> <br>
         color: <select id="mod_color">
                 <option value="red">red</option>
-                <option value="green">green</option>
-                <option value="#4286f4">blue</option>
+                <option value="GreenYellow">green</option>
+                <option value="LightSkyBlue">blue</option>
         </select>
         icon: <select id="mod_icon" class="icon-main">
                 <option value="&#xe800;">&#xe800;</option>
@@ -46,6 +46,18 @@
                 <option value="&#xB1;">&#xB1;</option>
         </select> <br>
         Tooltip: <input type="text" id="mod_tooltip"> <br>
+        priority: <select id="mod_priority">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+        </select> <br>
         <button onclick="grab()">Generate</button>
         <hr>
         JSON: <textarea id="output" style="width:500px;height:500px;"></textarea>
@@ -54,15 +66,16 @@ function grab(){
 
         var mod = {
                 "name" : String($("input#mod_name").val()),
-                "cost" : String($("input#mod_cost").val()),
-                "defaultcost" : String($("input#mod_cost").val()),
+                "cost" : Number($("input#mod_cost").val()),
+                "defaultcost" : Number($("input#mod_cost").val()),
                 "tag" : String($("select#mod_tag").val()),
                 "color" : String($("select#mod_color").val()),
                 "icon" : "&#x"+($("select#mod_icon").val()).codePointAt(0).toString(16),
                 "notes" : "",
-                "tooltip" : String($("input#mod_tooltip").val())
+                "tooltip" : String($("input#mod_tooltip").val()),
+                "priority" : Number($("select#mod_priority").val()),
         }
-        var display = JSON.stringify(mod);
+        var display = JSON.stringify(mod, null, 4);
         var old = String($("textarea#output").val());
         old = old + ", \n" + display; 
         $("textarea#output").text(old);

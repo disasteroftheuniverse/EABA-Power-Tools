@@ -172,3 +172,32 @@ table, th, td {
   font-weight: bolder;
 
 }
+
+.sheet-universal-scale table, .sheet-universal-scale tr, .sheet-universal-scale td {
+  font-family: arial;
+  font-size: 10px;
+  line-height: 12px;
+  border-collapse: collapse;
+  border: none;
+  border-spacing: 0px;
+  padding: 0px;
+}
+.sheet-universal-scale td {
+  text-align: center;
+  width: 40px;
+}
+.sheet-universal-scale tr:nth-child(2n+1) {
+  background-color: rgb(255, 255, 255);
+}
+.sheet-eaba-universal-chart {
+
+  width: 240px;
+}
+.sheet-universal-chart-div {
+
+  width: 280px;
+  overflow-y: scroll;
+  height: 440px;
+  top: 30px;
+  left: 0px;
+}
