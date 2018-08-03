@@ -172,7 +172,7 @@ function updatePower() { //updates user interface
 		cell[3] = "<td class='' >" + man + "</td>";
 		cell[4] = "<td class='powercost' >" + newRow.cost + "</td>";
 		cell[5] = "<td><button onclick='removePower(" + key + ")'>-</button></td>";
-		cell[6] = "<td><button onclick='movePowerUp("+key+")'>▲</button><button onclick='movePowerDn("+key+")'>▼</button></td>";
+		cell[6] = "<td><button onclick='movePowerUp("+key+")'>&#9650;</button><button onclick='movePowerDn("+key+")'>&#9660;</button></td>";
 		var row = String("<tr class='powerrow'>" + cell[0] + cell[1] + cell[2] + cell[3] + cell[4] + cell[5] + cell[6] + "</tr>" + "\n");
 		//logMe(row);
 		return modTable + row;
