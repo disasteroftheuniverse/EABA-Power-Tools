@@ -1,6 +1,6 @@
 var power = { //object of the total power
 	mods: [], //array holds modifiers from the EABA core rules
-	total: function () { //gets the sum of all mods, regardless of special rules
+	getTotals: function () { //gets the sum of all mods, regardless of special rules
 		this.realModTotal = Number(Number(_.reduce(_.pluck(this.mods, "cost"), function (memo, num) { return Number(memo) + Number(num); }, 0)));
 		this.modtotal = Math.min(Number(this.realModTotal),Number(this.techeffic));
 		this.modexcess = Math.floor(Number((this.realModTotal-this.modtotal)/4));
@@ -19,6 +19,10 @@ var power = { //object of the total power
 	modtotal: 0,
 	modexcess: 0, //the total amount
 	amGadget: 0,
+	quantityLevel: 0,
+	checkGadget : function (){
+		
+	},
 	checkInformation: function () { //eliminates fake news
 		var foo = _.sortBy(_.compact(_.map(this.mods, function (value, key) {
 			if (value.tag == "information") { return value };
@@ -65,7 +69,7 @@ function sortModifiers() {
 		var modComp = [];
 		_.each(modifiers, function (num, key) {
 			_.each(tags, function (a, b) {
-				//logMe(a);
+				logMe(a);
 				if (num.tag == a) {
 					//logMe(a);
 					modComp.push(num);
@@ -75,10 +79,25 @@ function sortModifiers() {
 		//logDir(modComp);
 		listModifiers(modComp);
 	});
-
-
-
 }
+
+var ALL_TAGS = ['mobility','control','alter','offense','defense','range','powerduration','effectduration'];
+var CYCLE_LIST_INDEX = 0;
+
+function cycleList(direction){
+	//var ALLTAGS = ['mobility','control','alter','offense','defense','range','powerduration'];
+	var myList = [];
+	CYCLE_LIST_INDEX = CYCLE_LIST_INDEX + direction;
+	var nextTag=ALL_TAGS[CYCLE_LIST_INDEX];
+	_.each(modifiers,function(val,key){
+		if (val.tag == nextTag) {
+			myList.push(val);
+		};
+	});
+	//logDir(myList);
+	listModifiers(myList);
+}
+
 //adds new mod entries into power.mod array
 function addPower(obj) {
 	power.mods.push(obj);
@@ -222,7 +241,7 @@ function updatePower() { //updates user interface
 		$("tr").remove(".powerrow"); //clear old table
 		$(".powertotals").before(output); //insert new table
 
-		$("#powertotal").text(power.total()); //display current power total
+		$("#powertotal").text(power.getTotals()); //display current power total
 		$("#powerfree").text(power.techbase); //display current gwb
 		$("#powerexcess").text(power.modexcess); //display current gwb
 		$("#powerfinal").text(power.base); //display current gwb

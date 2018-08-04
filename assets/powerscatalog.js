@@ -90,25 +90,6 @@ var modifiers = [
         "notes": "",
         "priority": 1
     }, 
-    {
-        "name": "power duration: time level", 
-        "cost": "varies", 
-        "tag": "powerduration", 
-        "color": "LightSkyBlue", 
-        "icon": "&#xe800;", 
-        "tooltip": "", 
-        "varies": "select", 
-        "defaultcost": "0", 
-        "notes": "", 
-        "select": {
-			"1 second" : 0,
-			"1 minute" : -1,
-			"1 hour" : 2,
-			"instant" : -3
-		},
-		"active":"0",
-        "priority": 4
-    }, 
     {"name":"off: acts as lethal dmg","cost":"0","defaultcost":"0","tag":"offense","color":"GreenYellow","icon":"&#xe800","notes":"","tooltip":"acts as lethal damage","priority": 1}, 
     {"name":"off: acts as stunning dmg","cost":"2","defaultcost":"2","tag":"offense","color":"LightSkyBlue","icon":"&#xe800","notes":"","tooltip":"acts as stunning damage","priority": 1}, 
     {"name":"off: acts as lethal melee","cost":"2","defaultcost":"2","tag":"offense","color":"GreenYellow","icon":"&#xe800","notes":"","tooltip":"acts as lethal melee","priority": 1}, 
@@ -633,6 +614,311 @@ var modifiers = [
         "notes": "",
         "tooltip": "",
         "priority": 3
+    }, 
+    {
+        "name": "pwr duration: instant",
+        "cost": 2,
+        "defaultcost": 2,
+        "tag": "powerduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: action",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "powerduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: until stunned",
+        "cost": -2,
+        "defaultcost": -2,
+        "tag": "powerduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: until knocked out",
+        "cost": -4,
+        "defaultcost": -4,
+        "tag": "powerduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: always on",
+        "cost": -2,
+        "defaultcost": -2,
+        "tag": "powerduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: declining",
+        "cost": -1,
+        "defaultcost": -1,
+        "tag": "powerduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: time delay",
+        "cost": 2,
+        "defaultcost": 2,
+        "tag": "powerduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "pwr duration: triggered",
+        "cost": -2,
+        "defaultcost": -2,
+        "tag": "powerduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 4
+    }, 
+    {
+        "name": "power duration: time level", 
+        "cost": "varies", 
+        "tag": "powerduration", 
+        "color": "LightSkyBlue", 
+        "icon": "&#xf252;", 
+        "tooltip": "", 
+        "varies": "select", 
+        "defaultcost": "0", 
+        "notes": "", 
+        "select": {
+			"1 second" : 0,
+			"1 minute" : -1,
+			"1 hour" : 2,
+			"instant" : -3
+		},
+		"active":"0",
+        "priority": 4
+    }, 
+    {
+        "name": "eff duration: until power dur. ends",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "effectduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: as stamina recovery",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "effectduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: as stunning dmg recovery",
+        "cost": -4,
+        "defaultcost": -4,
+        "tag": "effectduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: as lethal dmg recovery",
+        "cost": -5,
+        "defaultcost": -5,
+        "tag": "effectduration",
+        "color": "GreenYellow",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: semi-permanent",
+        "cost": -6,
+        "defaultcost": -6,
+        "tag": "effectduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: severable",
+        "cost": -1,
+        "defaultcost": -1,
+        "tag": "effectduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "eff duration: range-limited",
+        "cost": 2,
+        "defaultcost": 2,
+        "tag": "effectduration",
+        "color": "LightSkyBlue",
+        "icon": "&#xf252",
+        "notes": "",
+        "tooltip": "",
+        "priority": 5
+    }, 
+    {
+        "name": "def against: very broad type",
+        "cost": 4,
+        "defaultcost": 4,
+        "tag": "defenseagainst",
+        "color": "GreenYellow",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: broad type",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "defenseagainst",
+        "color": "GreenYellow",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: average type",
+        "cost": -2,
+        "defaultcost": 0,
+        "tag": "defenseagainst",
+        "color": "LightSkyBlue",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: narrow type",
+        "cost": -4,
+        "defaultcost": -4,
+        "tag": "defenseagainst",
+        "color": "red",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: esoteric",
+        "cost": -4,
+        "defaultcost": -4,
+        "tag": "defenseagainst",
+        "color": "LightSkyBlue",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: works as decreasing layers",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "defenseagainst",
+        "color": "GreenYellow",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: adds together",
+        "cost": 4,
+        "defaultcost": 4,
+        "tag": "defenseagainst",
+        "color": "LightSkyBlue",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: use only highest value",
+        "cost": -1,
+        "defaultcost": -1,
+        "tag": "defenseagainst",
+        "color": "LightSkyBlue",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: requires coverage",
+        "cost": 0,
+        "defaultcost": 0,
+        "tag": "defenseagainst",
+        "color": "GreenYellow",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: protects absolutely",
+        "cost": 4,
+        "defaultcost": 4,
+        "tag": "defenseagainst",
+        "color": "GreenYellow",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
+    }, 
+    {
+        "name": "def against: can be improvised",
+        "cost": 2,
+        "defaultcost": 2,
+        "tag": "defenseagainst",
+        "color": "LightSkyBlue",
+        "icon": "&#xe803",
+        "notes": "",
+        "tooltip": "",
+        "priority": 6
     }
 ]
 
