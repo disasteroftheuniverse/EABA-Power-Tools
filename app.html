@@ -37,8 +37,11 @@
     <a href="modcreator.html" class="myButton">Goto mod entry</a>
   </div>
 
-  <div>
+  <div class="splitTop">
     <div class="filterTable">
+      <div>
+        <b>Effects</b>
+      </div>
       <table class="modlist">
         <tr>
           <td>
@@ -69,7 +72,49 @@
             <input type="checkbox" id="filter_defense" name="defense" value="1" class="myFilter" onclick="sortModifiers()">defense
           </td>
           <td>
+            <!-- <input type="checkbox" id="filter_range" name="range" value="1" class="myFilter" onclick="sortModifiers()">range -->
+          </td>
+        </tr>
+      </table>
+      <div>
+        <b>Limits</b>
+      </div>
+      <table class="modlist">
+        <tr>
+          <td>
             <input type="checkbox" id="filter_range" name="range" value="1" class="myFilter" onclick="sortModifiers()">range
+          </td>
+          <td>
+            <input type="checkbox" id="filter_effectduraction" name="effectduraction" value="1" class="myFilter" onclick="sortModifiers()">effect duration
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_powerduration" name="powerduration" value="1" class="myFilter" onclick="sortModifiers()">power duration
+          </td>
+          <td>
+            <input type="checkbox" id="filter_defenseagainst" name="defenseagainst" value="1" class="myFilter" onclick="sortModifiers()">defense against
+          </td>
+        </tr>
+      </table>
+      <div>
+        <b>Circumstance</b>
+      </div>
+      <table class="modlist">
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_ceiling" name="ceiling" value="1" class="myFilter" onclick="sortModifiers()">range
+          </td>
+          <td>
+            <input type="checkbox" id="filter_circumstance" name="circumstance" value="1" class="myFilter" onclick="sortModifiers()">effect duration
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" id="filter_coverage" name="coverage" value="1" class="myFilter" onclick="sortModifiers()">power duration
+          </td>
+          <td>
+            <input type="checkbox" id="filter_difficulty" name="difficulty" value="1" class="myFilter" onclick="sortModifiers()">defense against
           </td>
         </tr>
       </table>
@@ -79,65 +124,108 @@
     <!-- <button onclick="buildRow ()">Filter</button> -->
   </div>
 
-  <div class="leftTable">
-    <table class="modlist">
-      <tr class="availablemods">
-        <th>Icon</th>
-        <th>Name</th>
-        <th>Cost</th>
-        <th>Use</th>
-      </tr>
-    </table>
+  <div class='splitLeft'>
+    <div class="leftTable">
+      <table class="modlist">
+        <tr class="availablemods">
+          <th>Icon</th>
+          <th>Name</th>
+          <th>Cost</th>
+          <th>Use</th>
+        </tr>
+      </table>
+    </div>
   </div>
 
-  <div class="rightTable">
-    <table class="powerlist">
-      <!-- <tr class="availablepower">
-        <th>Icon</th>
-        <th>Name</th>
-        <th>Notes</th>
-        <th>Select</th>
-        <th>Cost</th>
-        <th>Use</th>
-      </tr> -->
-      <tr class="availablepower">
-        <td></td>
-        <td>
-          <b>Power Name</b>
-        </td>
-        <td>
-          <input type='text' class='notearea' id='power_name' onchange='updatePower()'>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+  <div class="splitRight">
 
-      <tr class="availablepower">
-        <td></td>
-        <td>Gameworld Base</td>
-        <td>
-          <input type='number' class='notearea-number' id='power_gameworldbase' onchange='updatePower()'>
-          <input type='number' class='notearea-number' id='power_gameworldeffic' onchange='updatePower()'>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="powertotals">
-        <td>
-          <button onclick='organizePower()'>Sort</button>
-        </td>
-        <td></td>
-        <td>Base Power:</td>
-        <td></td>
-        <td>
-          <span class='powercost highlights' id="powertotal">0</span>
-        </td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
+    <div class="rightTable">
+      <table class="powerlist">
+        <!-- <tr class="availablepower">
+          <th>Icon</th>
+          <th>Name</th>
+          <th>Notes</th>
+          <th>Select</th>
+          <th>Cost</th>
+          <th>Use</th>
+        </tr> -->
+        <tr class="availablepower">
+          <td></td>
+          <td>
+            <b>Power Name</b>
+          </td>
+          <td>
+            <input type='text' class='notearea' id='power_name' onchange='updatePower()'>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr class="availablepower">
+          <td></td>
+          <td>Gameworld Base</td>
+          <td>
+            <input type='number' class='notearea-number' id='power_gameworldbase' onchange='updatePower()' value='3'>
+            <input type='number' class='notearea-number' id='power_gameworldeffic' onchange='updatePower()' value='12'>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="powertotals sumline">
+          <td>
+            <button onclick='organizePower()'>Sort</button>
+          </td>
+          <td></td>
+          <td>Total or effic.(b):</td>
+          <td></td>
+          <td>
+            <div class='powercost highlights' id="powertotal">0</div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="sumline">
+          <td>
+          </td>
+          <td></td>
+          <td>Free Amount (a):</td>
+          <td></td>
+          <td class="power-results">
+            <div class='powercost highlights' id="powerfree">0</div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="sumline">
+          <td>
+          </td>
+          <td></td>
+          <td>Excess/4:</td>
+          <td></td>
+          <td class="power-results">
+            <div class='powercost highlights' id="powerexcess">0</div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr class="sumline">
+          <td>
+          </td>
+          <td></td>
+          <td>
+            <b>Base Power Level:</b>
+          </td>
+          <td></td>
+          <td class="power-results">
+            <div class='powercost highlights finalpower' id="powerfinal">0</div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
   </div>
   <br>
   <!-- <table class="sheet-universal-scale sheet-eaba-universal-chart" style="left: 16px; top: 8px;">

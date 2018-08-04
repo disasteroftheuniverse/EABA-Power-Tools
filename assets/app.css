@@ -36,13 +36,41 @@ table, th, td {
   .leftTable, .rightTable {
     position:relative;
     float:left;
-    background-color: #5b5b5b;
+    
     min-width:300px;
     margin: 8px;
     font-size: 10px;
     border-radius: 8px;
     box-shadow: 4px 4px 2px 0px #000000;
     padding: 8px;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px black; 
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkgrey; 
+  border-radius: 10px;
+}
+
+  .leftTable {
+    overflow: scroll;
+    height:80%;
+    padding:8px;
+    background-color: #5b5b5b;
+  }
+
+  .rightTable {
+    background-color: #727272;
   }
 
   td.powername {
@@ -117,6 +145,7 @@ table, th, td {
   margin:2px;
   padding: 1px;
   border-width: 1px;
+  text-align:center;
 
 }
 
@@ -173,16 +202,24 @@ table, th, td {
   vertical-align: middle;
 }
 
+td.power-results {
+  width: 40px;
+  column-width: 40px;
+  -webkit-column-width: 40px; /* Chrome, Safari, Opera */
+  -moz-column-width: 40px; /* Firefox */
+}
 
 .highlights {
 
-  margin: 12px;
-  padding: 4px;
+  margin: 1px;
+  padding: 1px;
   background-color: lightslategray;
   border: 1px solid black;
   border-radius: 2px;
   color: black;
   font-weight: bolder;
+  min-width: 24px;
+  text-align:center;
 
 }
 
@@ -225,4 +262,38 @@ table, th, td {
   border-radius: 8px;
   box-shadow: 4px 4px 2px 0px #000000;
   padding: 8px;
+  font-size: 10px;
+}
+
+.filterTable td{
+  font-size: 10px;
+}
+
+.sumline {
+  line-height: 22px;
+}
+
+.finalPower {
+    font-size: 20px;
+    font-weight: bolder;
+    background-color:lightsalmon;
+    line-height: 28px;
+}
+
+td button {
+  border-radius: 8px;
+  border-style:none;
+  margin: 1px 3px 1px 1px;
+}
+
+.mynotes {
+  background-color:#232323;
+  border:none;
+  color:white;
+  margin:1px;
+}
+
+.splitLeft {
+  background-color: white; 
+
 }

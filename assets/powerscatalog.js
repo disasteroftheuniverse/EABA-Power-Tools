@@ -93,7 +93,7 @@ var modifiers = [
     {
         "name": "power duration: time level", 
         "cost": "varies", 
-        "tag": "duration", 
+        "tag": "powerduration", 
         "color": "LightSkyBlue", 
         "icon": "&#xe800;", 
         "tooltip": "", 
@@ -107,7 +107,7 @@ var modifiers = [
 			"instant" : -3
 		},
 		"active":"0",
-        "priority": 3
+        "priority": 4
     }, 
     {"name":"off: acts as lethal dmg","cost":"0","defaultcost":"0","tag":"offense","color":"GreenYellow","icon":"&#xe800","notes":"","tooltip":"acts as lethal damage","priority": 1}, 
     {"name":"off: acts as stunning dmg","cost":"2","defaultcost":"2","tag":"offense","color":"LightSkyBlue","icon":"&#xe800","notes":"","tooltip":"acts as stunning damage","priority": 1}, 

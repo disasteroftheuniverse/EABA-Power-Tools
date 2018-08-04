@@ -1,13 +1,24 @@
 var power = { //object of the total power
 	mods: [], //array holds modifiers from the EABA core rules
 	total: function () { //gets the sum of all mods, regardless of special rules
-		return Number(_.reduce(_.pluck(this.mods, "cost"), function (memo, num) { return Number(memo) + Number(num); }, 0));
+		this.realModTotal = Number(Number(_.reduce(_.pluck(this.mods, "cost"), function (memo, num) { return Number(memo) + Number(num); }, 0)));
+		this.modtotal = Math.min(Number(this.realModTotal),Number(this.techeffic));
+		this.modexcess = Math.floor(Number((this.realModTotal-this.modtotal)/4));
+		this.base = Number(Number(this.modtotal)+Number(this.modexcess)+Number(this.techbase));
+		//logMe(this.base);
+		return this.modtotal;
 	},
 	name : "my power",
 	setName : function (n) {
 		this.name = n;
 	},
 	base: 0, //integer holds base power level
+	techeffic: 12,
+	techbase: 3,
+	realModTotal : 0,
+	modtotal: 0,
+	modexcess: 0, //the total amount
+	amGadget: 0,
 	checkInformation: function () { //eliminates fake news
 		var foo = _.sortBy(_.compact(_.map(this.mods, function (value, key) {
 			if (value.tag == "information") { return value };
@@ -165,17 +176,17 @@ function clearPower () {
 	power.mods =[];
 	updatePower();
 }
+
 function updatePower() { //updates user interface
 	var i = 0; //bean counter
-
-	logDir(power.mods);
+	//logDir(power.mods);
 	var output = "";
 	output = String(_.reduce(power.mods, function (modTable, newRow, key) {
 		//logDir(newRow);
 		var cell = ["", "", "", "", "", ""];
 		cell[0] = String("<td class='icon-main powercolor' style='color:" + newRow.color + ";'>" + newRow.icon + "</td>");
 		cell[1] = "<td class='powername'>" + newRow.name + "</td>";
-		var noteInput = "<input type='text' class='notearea' id='note_" + key + "' onchange='changeNote(" + key + ")' value='" + newRow.notes + "'></input>";
+		var noteInput = "<input type='text' class='notearea mynotes' id='note_" + key + "' onchange='changeNote(" + key + ")' value='" + newRow.notes + "'></input>";
 		cell[2] = "<td>" + noteInput + "</td>";
 		var man = "";
 		if (power.mods[key].cost == 'varies') { power.mods[key].cost = '0' };
@@ -189,9 +200,9 @@ function updatePower() { //updates user interface
 					man = createSelect(newRow.select, key, newRow.active);
 					break;
 				default:
-					man = "none";
+					man = "&nbsp;";
 			}
-		} else { man = "none" };
+		} else { man = "&nbsp;" };
 
 		cell[3] = "<td class='' >" + man + "</td>";
 		cell[4] = "<td class='powercost' >" + newRow.cost + "</td>";
@@ -205,12 +216,20 @@ function updatePower() { //updates user interface
 
 	$(document).ready(function () { //warning, async
 		power.name = $("#power_name").val();
-		$("tr").remove(".powerrow"); //clear old table
-		$(".powertotals").before(output);
-		$("SPAN#powertotal").text(power.total()); //display current power total
-		$("#power_name").val(power.name);
-		logMe(power.name);
+		power.techbase = $("#power_gameworldbase").val();
+		power.techeffic = $("#power_gameworldeffic").val();
 
+		$("tr").remove(".powerrow"); //clear old table
+		$(".powertotals").before(output); //insert new table
+
+		$("#powertotal").text(power.total()); //display current power total
+		$("#powerfree").text(power.techbase); //display current gwb
+		$("#powerexcess").text(power.modexcess); //display current gwb
+		$("#powerfinal").text(power.base); //display current gwb
+
+		$("#power_name").val(power.name);
+		$("#power_gameworldbase").val(power.techbase);
+		$("#power_gameworldeffic").val(power.techeffic);
 	});
 
 };
