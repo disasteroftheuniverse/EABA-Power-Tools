@@ -1,3 +1,36 @@
+function powerTemplate(name, mods,techbase,techeffic) {//mods,name){
+	this.mods = mods;
+	this.name = name;
+	this.base = 0; //integer holds base power level
+	this.techeffic = techeffic;
+	this.techbase = techbase;
+	this.realModTotal = 0;
+	this.modtotal = 0;
+	this.modexcess = 0; //the total amount
+	this.amGadget = 0;
+	this.quantityLevel = 0;
+	this.checkGadget = function () {
+		// waiting to add this
+	};
+	this.checkInformation = function () { //eliminates fake news
+		var foo = _.sortBy(_.compact(_.map(this.mods, function (value, key) {
+			if (value.tag == "information") { return value };
+		})), "cost");
+		logDir(foo);
+	}
+	this.getTotals = function () { //gets the sum of all mods, regardless of special rules
+		this.realModTotal = Number(Number(_.reduce(_.pluck(this.mods, "cost"), function (memo, num) { return Number(memo) + Number(num); }, 0)));
+		this.modtotal = Math.min(Number(this.realModTotal), Number(this.techeffic));
+		this.modexcess = Math.floor(Number((this.realModTotal - this.modtotal) / 4));
+		this.base = Number(Number(this.modtotal) + Number(this.modexcess) + Number(this.techbase));
+		//logMe(this.base);
+		return this.modtotal;
+	};
+
+};
+
+var power = new powerTemplate("", [],0,0);
+/*
 var power = { //object of the total power
 	mods: [], //array holds modifiers from the EABA core rules
 	getTotals: function () { //gets the sum of all mods, regardless of special rules
@@ -21,7 +54,7 @@ var power = { //object of the total power
 	amGadget: 0,
 	quantityLevel: 0,
 	checkGadget : function (){
-		
+
 	},
 	checkInformation: function () { //eliminates fake news
 		var foo = _.sortBy(_.compact(_.map(this.mods, function (value, key) {
@@ -29,7 +62,7 @@ var power = { //object of the total power
 		})), "cost");
 		logDir(foo);
 	}
-};
+}; */
 
 function fakeNews() {
 	power.checkInformation();
@@ -81,15 +114,15 @@ function sortModifiers() {
 	});
 }
 
-var ALL_TAGS = ['mobility','control','alter','offense','defense','range','powerduration','effectduration'];
+var ALL_TAGS = ['mobility', 'control', 'alter', 'offense', 'defense', 'range', 'powerduration', 'effectduration'];
 var CYCLE_LIST_INDEX = 0;
 
-function cycleList(direction){
+function cycleList(direction) {
 	//var ALLTAGS = ['mobility','control','alter','offense','defense','range','powerduration'];
 	var myList = [];
 	CYCLE_LIST_INDEX = CYCLE_LIST_INDEX + direction;
-	var nextTag=ALL_TAGS[CYCLE_LIST_INDEX];
-	_.each(modifiers,function(val,key){
+	var nextTag = ALL_TAGS[CYCLE_LIST_INDEX];
+	_.each(modifiers, function (val, key) {
 		if (val.tag == nextTag) {
 			myList.push(val);
 		};
@@ -153,7 +186,7 @@ function movePowerUp(index) { //moves selected mod up in list
 
 function movePowerDn(index) { //pulls  mod entries from power.mod array
 	var n = 0;
-	
+
 	n = Number(power.mods.length) - 1;
 	console.log(n);
 	if (index != n) {
@@ -165,12 +198,12 @@ function movePowerDn(index) { //pulls  mod entries from power.mod array
 	}
 };
 
-function newPower(){
+function newPower() {
 	$(document).ready(function () {
-
-		power.mods = [];
+		power = new powerTemplate("",[],0,0);
+		power.getTotals();
 		listModifiers();
-		updatePower();
+		//updatePower();
 		var newName = prompt("Please enter new power name", "My Awesome Power");
 
 		if (_.isUndefined(newName)) {
@@ -178,25 +211,25 @@ function newPower(){
 		}
 
 		power.name = newName;
-		$("#power_name").val(power.name);
-		
+		importPower();
 		updatePower();
 
 	});
 }
 
-function organizePower(){
-	power.mods = _.sortBy(power.mods,'priority');
+function organizePower() {
+	power.mods = _.sortBy(power.mods, 'priority');
 	updatePower();
 }
 
-function clearPower () {
+function clearPower() {
 	power.name = "";
-	power.mods =[];
+	power.mods = [];
 	updatePower();
 }
 
 function updatePower() { //updates user interface
+	power.getTotals();
 	var i = 0; //bean counter
 	//logDir(power.mods);
 	var output = "";
@@ -226,7 +259,7 @@ function updatePower() { //updates user interface
 		cell[3] = "<td class='' >" + man + "</td>";
 		cell[4] = "<td class='powercost' >" + newRow.cost + "</td>";
 		cell[5] = "<td><button onclick='removePower(" + key + ")'>-</button></td>";
-		cell[6] = "<td><button onclick='movePowerUp("+key+")'>&#9650;</button><button onclick='movePowerDn("+key+")'>&#9660;</button></td>";
+		cell[6] = "<td><button onclick='movePowerUp(" + key + ")'>&#9650;</button><button onclick='movePowerDn(" + key + ")'>&#9660;</button></td>";
 		var row = String("<tr class='powerrow'>" + cell[0] + cell[1] + cell[2] + cell[3] + cell[4] + cell[5] + cell[6] + "</tr>" + "\n");
 		//logMe(row);
 		return modTable + row;
@@ -245,13 +278,23 @@ function updatePower() { //updates user interface
 		$("#powerfree").text(power.techbase); //display current gwb
 		$("#powerexcess").text(power.modexcess); //display current gwb
 		$("#powerfinal").text(power.base); //display current gwb
+		importPower();
+/*
+		$("#power_name").val(power.name);
+		$("#power_gameworldbase").val(power.techbase);
+		$("#power_gameworldeffic").val(power.techeffic); */
+		//$(".gadgetTotals").before();
+	});
 
+};
+
+function importPower() {
+	$(document).ready(function () {
 		$("#power_name").val(power.name);
 		$("#power_gameworldbase").val(power.techbase);
 		$("#power_gameworldeffic").val(power.techeffic);
 	});
-
-};
+}
 
 function createSelect(obj, id, selected) {
 	var select = new String;
@@ -269,14 +312,17 @@ function createSelect(obj, id, selected) {
 //-------------------------------Read/Write---------------------------------
 function saveToLocal() {
 	updatePower();
-	var temp = power.mods.slice(0); 
-	temp.push({"name" : power.name});
+	var temp = new jQuery.extend(true, {}, power)
+	//temp.push({"name" : power.name});
 	//logDir(temp);
 	var data = LZString.compressToEncodedURIComponent(JSON.stringify(temp));
 	//logMe(data);
 	var blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-	var filetitle=power.name;
-	saveAs(blob, filetitle+".eaba");
+	var filetitle = power.name;
+	saveAs(blob, filetitle + ".eaba");
+
+	//var blankPower = new powerTemplate();
+	//logDir(blankPower);
 
 }
 
@@ -287,24 +333,25 @@ function openLocal() {
 	});
 }
 
-var readTextFile = function() {
+var readTextFile = function () {
 	var file = document.querySelector('input[type=file]').files[0];
-
 	var reader = new FileReader();
-
 	var out;
 	var importedPowers;
 	reader.addEventListener("load", function () {
-		out=reader.result;
+		out = reader.result;
 		var deflated = new String;
 		deflated = LZString.decompressFromEncodedURIComponent(out);
 		importedPowers = JSON.parse(deflated);
-		logMe(importedPowers[importedPowers.length-1].name);
-		importedPowers.pop();
-		logMe(out);
-		logMe(deflated);
-		power.mods=[];
-		power.mods=importedPowers;
+		//logMe(importedPowers[importedPowers.length-1].name);
+		//importedPowers.pop();
+		//logMe(out);
+		//logMe(deflated);
+		//power.mods=[];
+		//power.mods=importedPowers;
+		power = new powerTemplate(importedPowers.name,importedPowers.mods,importedPowers.techbase,importedPowers.techeffic);
+		power.getTotals();
+		importPower();
 		updatePower();
 	}, false);
 	if (file) {
@@ -313,7 +360,7 @@ var readTextFile = function() {
 }
 
 function uploader() {
-	power.mods=[];
+	power.mods = [];
 	updatePower();
 	var openme = document.getElementById("uploader").value;
 	var showme = readTextFile();//openme);
